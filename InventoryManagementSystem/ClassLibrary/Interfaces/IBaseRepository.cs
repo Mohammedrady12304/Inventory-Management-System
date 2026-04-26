@@ -8,10 +8,11 @@ namespace Class_Library.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<T> GetByIdAsync(int id);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task AddAsync(T entity);
-        void Delete(T entity);
+        IEnumerable<T> GetAll();
+        T? GetById(object id);
+        void Add(T entity);
         void Update(T entity);
+        void Delete(object id);
+        void Save();
     }
 }

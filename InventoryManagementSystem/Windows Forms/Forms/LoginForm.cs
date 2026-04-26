@@ -1,20 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Class_Library.Services;
+using System;
 using System.Windows.Forms;
 
 namespace Windows_Forms.Forms
 {
     public partial class LoginForm : Form
     {
+        private readonly UserRepository _userRepo;
+
         public LoginForm()
         {
             InitializeComponent();
+            _userRepo = new UserRepository(Program.DbContext);
+        }
+
+        private void checkBoxPass_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPass.UseSystemPasswordChar = !checkBoxPass.Checked;
+        }
+
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            txtName.Clear();
+            txtPass.Clear();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            var user = _userRepo.Authenticate(txtName.Text, txtPass.Text);
+            if (user != null)
+            {
+                MessageBox.Show($"Welcome {user.fullname}!", "ACCESS GRANTED",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password!", "ACCESS DENIED",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

@@ -1,31 +1,41 @@
 ﻿using Class_Library.Context;
 using Class_Library.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Class_Library.Services
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly InventoryManagementContext _context;
+        protected readonly DbSet<T> _dbSet;
 
         public BaseRepository(InventoryManagementContext context)
         {
             _context = context;
+            _dbSet = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
+        public IEnumerable<T> GetAll() => _dbSet.ToList();
 
-        public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
+        public T? GetById(object id) => _dbSet.Find(id);
 
-        public async Task AddAsync(T entity) => await _context.Set<T>().AddAsync(entity);
+        public void Add(T entity)
+        {
+            _dbSet.Add(entity);
+        }
 
-        public void Delete(T entity) => _context.Set<T>().Remove(entity);
+        public void Update(T entity)
+        {
+            _dbSet.Update(entity);
+        }
 
-        public abstract void Update(T entity);
+        public void Delete(object id)
+        {
+            var entity = _dbSet.Find(id);
+            if (entity != null)
+                _dbSet.Remove(entity);
+        }
+
+        public void Save() => _context.SaveChanges();
     }
 }
