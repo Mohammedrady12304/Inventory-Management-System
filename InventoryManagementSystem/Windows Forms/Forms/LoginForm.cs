@@ -39,5 +39,15 @@ namespace Windows_Forms.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
