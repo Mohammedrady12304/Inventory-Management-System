@@ -30,24 +30,24 @@ namespace Windows_Forms.Forms
             var user = _userRepo.Authenticate(txtName.Text, txtPass.Text);
             if (user != null)
             {
+                lblError.Visible = false;
                 MessageBox.Show($"Welcome {user.fullname}!", "ACCESS GRANTED",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Invalid username or password!", "ACCESS DENIED",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblError.Text = "Invalid username or password!";
+                lblError.Visible = true;
             }
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
+      
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
     }
 }

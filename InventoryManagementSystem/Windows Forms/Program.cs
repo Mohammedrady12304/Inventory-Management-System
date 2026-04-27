@@ -21,8 +21,8 @@ namespace Windows_Forms
             DbContext = new InventoryManagementContext(options);
             DbContext.Database.EnsureCreated();
 
-            //Application.Run(new LoginForm());
-            Application.Run(new UserForm());
+            Application.Run(new LoginForm());
+            //Application.Run(new UserForm());
         }
     }
 }
