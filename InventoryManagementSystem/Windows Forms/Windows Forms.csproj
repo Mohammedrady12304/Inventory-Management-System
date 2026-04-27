@@ -13,4 +13,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\Class Library.csproj" />
+  </ItemGroup>
+
 </Project>
