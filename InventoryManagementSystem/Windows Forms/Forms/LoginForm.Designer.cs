@@ -51,7 +51,7 @@
             // 
             // checkBoxPass
             // 
-            checkBoxPass.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            checkBoxPass.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             checkBoxPass.Location = new Point(238, 280);
             checkBoxPass.Name = "checkBoxPass";
             checkBoxPass.Size = new Size(104, 24);
@@ -65,7 +65,7 @@
             btnLogin.Cursor = Cursors.Hand;
             btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.Font = new Font("SimSun-ExtG", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             btnLogin.ForeColor = Color.Black;
             btnLogin.Location = new Point(214, 328);
             btnLogin.Name = "btnLogin";
@@ -78,7 +78,7 @@
             // lblClear
             // 
             lblClear.Cursor = Cursors.Hand;
-            lblClear.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblClear.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             lblClear.ForeColor = Color.Gray;
             lblClear.Location = new Point(335, 336);
             lblClear.Name = "lblClear";
@@ -90,7 +90,7 @@
             // 
             // lblTitle
             // 
-            lblTitle.Font = new Font("SimSun-ExtG", 14F, FontStyle.Bold | FontStyle.Italic);
+            lblTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.Black;
             lblTitle.Location = new Point(85, 128);
             lblTitle.Name = "lblTitle";
@@ -101,7 +101,7 @@
             // 
             // lblUsername
             // 
-            lblUsername.Font = new Font("SimSun-ExtG", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            lblUsername.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblUsername.ForeColor = Color.Black;
             lblUsername.Location = new Point(113, 192);
             lblUsername.Name = "lblUsername";
@@ -111,7 +111,7 @@
             // 
             // lblPassword
             // 
-            lblPassword.Font = new Font("SimSun-ExtG", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            lblPassword.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblPassword.ForeColor = Color.Black;
             lblPassword.Location = new Point(113, 240);
             lblPassword.Name = "lblPassword";
@@ -141,11 +141,11 @@
             // lblError
             // 
             lblError.AutoSize = true;
-            lblError.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblError.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblError.ForeColor = Color.FromArgb(192, 0, 0);
             lblError.Location = new Point(200, 305);
             lblError.Name = "lblError";
-            lblError.Size = new Size(49, 20);
+            lblError.Size = new Size(48, 20);
             lblError.TabIndex = 9;
             lblError.Text = "label1";
             lblError.Visible = false;
