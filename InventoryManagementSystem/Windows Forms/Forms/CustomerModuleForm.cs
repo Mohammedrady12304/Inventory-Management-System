@@ -40,7 +40,9 @@ namespace Windows_Forms.Forms
             MessageBox.Show("Customer saved successfully.", "Success",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            this.Close();
             ClearFields();
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -67,6 +69,7 @@ namespace Windows_Forms.Forms
             MessageBox.Show("Customer updated successfully.", "Success",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            this.Close();
             ClearFields();
         }
 

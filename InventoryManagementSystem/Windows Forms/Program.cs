@@ -21,7 +21,7 @@ namespace Windows_Forms
 
             DbContext = new InventoryManagementContext(options);
 
-            DbInitializer.Seed(DbContext);
+            //DbInitializer.Seed(DbContext);
 
             Application.Run(new LoginForm());
         }
