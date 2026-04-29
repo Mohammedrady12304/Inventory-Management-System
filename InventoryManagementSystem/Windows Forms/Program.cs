@@ -21,16 +21,18 @@ namespace Windows_Forms
 
             DbContext = new InventoryManagementContext(options);
 
- product-hatem
+
+ 
             // Application.Run(new CustomerForm());
             //Application.Run(new LoginForm());
             //Application.Run(new UserForm());
-            Application.Run(new ProductForm()); 
+           // Application.Run(new ProductForm()); 
 
             DbInitializer.Seed(DbContext);
 
+   
             Application.Run(new LoginForm());
- master
+
         }
     }
 }

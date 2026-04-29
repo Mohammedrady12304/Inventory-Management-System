@@ -88,7 +88,7 @@ namespace Windows_Forms.Forms
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //openChildForm(new Customer());
+            openChildForm(new CustomerForm());
         }
 
         private void label1_Click(object sender, EventArgs e)
