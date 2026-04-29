@@ -24,7 +24,7 @@ namespace Class_Library.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=.;Database=dbIMS;Integrated Security=True;TrustServerCertificate=True;"
+                    @"Server=.;Database=InventoryManagementSystem;Integrated Security=True;TrustServerCertificate=True;"
                 );
             }
         }
