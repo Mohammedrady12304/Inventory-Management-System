@@ -1,4 +1,5 @@
 using Class_Library.Context;
+using Class_Library.Services;
 using Microsoft.EntityFrameworkCore;
 using Windows_Forms.Forms;
 
@@ -15,14 +16,14 @@ namespace Windows_Forms
             Application.SetCompatibleTextRenderingDefault(false);
 
             var options = new DbContextOptionsBuilder<InventoryManagementContext>()
-                .UseSqlServer(@"Server=.;Database=dbIMS;Integrated Security=True;TrustServerCertificate=True;")
+                .UseSqlServer(@"Server=.;Database=InventoryManagementSystem;Integrated Security=True;TrustServerCertificate=True;")
                 .Options;
 
             DbContext = new InventoryManagementContext(options);
-            DbContext.Database.EnsureCreated();
+
+            DbInitializer.Seed(DbContext);
 
             Application.Run(new LoginForm());
-            //Application.Run(new UserForm());
         }
     }
 }
