@@ -116,5 +116,9 @@ namespace Windows_Forms.Forms
 
         }
 
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
