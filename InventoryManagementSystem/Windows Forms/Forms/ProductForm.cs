@@ -2,6 +2,7 @@
 using Class_Library.Context;
 using Class_Library.Services;
 using InventoryManagementSystem.ClassLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace  Windows_Forms.Forms
 {
@@ -22,7 +23,11 @@ namespace  Windows_Forms.Forms
 
             string search = txtSearch.Text.ToLower();
 
+
+            db = new InventoryManagementContext();
+
             var products = db.Products
+                .AsNoTracking()
                 .Where(p =>
                     p.pid.ToString().Contains(search) ||
                     p.pname.ToLower().Contains(search) ||
@@ -45,7 +50,7 @@ namespace  Windows_Forms.Forms
             }
         }
 
-        
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

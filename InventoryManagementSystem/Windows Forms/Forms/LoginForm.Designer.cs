@@ -37,7 +37,7 @@
             // 
             txtName.BorderStyle = BorderStyle.FixedSingle;
             txtName.Font = new Font("Segoe UI", 11F);
-            txtName.Location = new Point(75, 244);
+            txtName.Location = new Point(828, 342);
             txtName.Name = "txtName";
             txtName.Size = new Size(338, 32);
             txtName.TabIndex = 3;
@@ -46,7 +46,7 @@
             // 
             txtPass.BorderStyle = BorderStyle.FixedSingle;
             txtPass.Font = new Font("Segoe UI", 11F);
-            txtPass.Location = new Point(75, 323);
+            txtPass.Location = new Point(828, 421);
             txtPass.Name = "txtPass";
             txtPass.Size = new Size(338, 32);
             txtPass.TabIndex = 4;
@@ -55,7 +55,7 @@
             // checkBoxPass
             // 
             checkBoxPass.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBoxPass.Location = new Point(386, 328);
+            checkBoxPass.Location = new Point(1139, 424);
             checkBoxPass.Name = "checkBoxPass";
             checkBoxPass.Size = new Size(18, 24);
             checkBoxPass.TabIndex = 5;
@@ -70,7 +70,7 @@
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             btnLogin.ForeColor = Color.Black;
-            btnLogin.Location = new Point(75, 395);
+            btnLogin.Location = new Point(828, 493);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(338, 43);
             btnLogin.TabIndex = 6;
@@ -82,7 +82,7 @@
             // 
             lblTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.Black;
-            lblTitle.Location = new Point(21, 156);
+            lblTitle.Location = new Point(774, 254);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(450, 35);
             lblTitle.TabIndex = 0;
@@ -93,7 +93,7 @@
             // 
             lblUsername.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblUsername.ForeColor = Color.Black;
-            lblUsername.Location = new Point(75, 210);
+            lblUsername.Location = new Point(828, 306);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(110, 31);
             lblUsername.TabIndex = 1;
@@ -103,7 +103,7 @@
             // 
             lblPassword.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblPassword.ForeColor = Color.Black;
-            lblPassword.Location = new Point(75, 290);
+            lblPassword.Location = new Point(828, 386);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(110, 32);
             lblPassword.TabIndex = 2;
@@ -122,11 +122,11 @@
             panel1.Controls.Add(checkBoxPass);
             panel1.Controls.Add(txtName);
             panel1.Controls.Add(txtPass);
-            panel1.Dock = DockStyle.Right;
+            panel1.Dock = DockStyle.Fill;
             panel1.ForeColor = Color.FromArgb(64, 64, 64);
-            panel1.Location = new Point(400, 0);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(500, 500);
+            panel1.Size = new Size(1380, 720);
             panel1.TabIndex = 8;
             // 
             // btnExit
@@ -135,7 +135,7 @@
             btnExit.Cursor = Cursors.Hand;
             btnExit.FlatAppearance.BorderSize = 0;
             btnExit.FlatStyle = FlatStyle.Flat;
-            btnExit.Location = new Point(453, 12);
+            btnExit.Location = new Point(1345, 0);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(35, 30);
             btnExit.TabIndex = 9;
@@ -148,7 +148,7 @@
             lblError.AutoSize = true;
             lblError.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblError.ForeColor = Color.FromArgb(192, 0, 0);
-            lblError.Location = new Point(158, 372);
+            lblError.Location = new Point(911, 468);
             lblError.Name = "lblError";
             lblError.Size = new Size(48, 20);
             lblError.TabIndex = 9;
@@ -158,7 +158,7 @@
             // picLogo
             // 
             picLogo.Image = Properties.Resources.logo;
-            picLogo.Location = new Point(192, 42);
+            picLogo.Location = new Point(945, 138);
             picLogo.Name = "picLogo";
             picLogo.Size = new Size(100, 100);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -172,7 +172,7 @@
             leftPanel.Dock = DockStyle.Left;
             leftPanel.Location = new Point(0, 0);
             leftPanel.Name = "leftPanel";
-            leftPanel.Size = new Size(400, 500);
+            leftPanel.Size = new Size(642, 720);
             leftPanel.TabIndex = 9;
             // 
             // pictureBox1
@@ -181,7 +181,7 @@
             pictureBox1.Image = Properties.Resources.login;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(400, 500);
+            pictureBox1.Size = new Size(642, 720);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -191,7 +191,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DodgerBlue;
-            ClientSize = new Size(900, 500);
+            ClientSize = new Size(1380, 720);
             Controls.Add(leftPanel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;

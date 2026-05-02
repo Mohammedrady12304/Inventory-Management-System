@@ -103,11 +103,12 @@
             lblWelcome.AutoSize = true;
             lblWelcome.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblWelcome.ForeColor = Color.MidnightBlue;
-            lblWelcome.Location = new Point(1030, 20);
+            lblWelcome.Location = new Point(1005, 24);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(60, 28);
             lblWelcome.TabIndex = 13;
             lblWelcome.Text = "Label";
+            lblWelcome.Click += lblWelcome_Click;
             // 
             // label1
             // 

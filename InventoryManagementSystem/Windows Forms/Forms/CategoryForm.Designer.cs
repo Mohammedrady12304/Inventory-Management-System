@@ -42,53 +42,62 @@
             // 
             // dgvCategory
             // 
+            dgvCategory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCategory.Columns.AddRange(new DataGridViewColumn[] { ColNo, ColCatId, ColCatName, Edit, Delete });
-            dgvCategory.Location = new Point(-3, 48);
+            dgvCategory.Dock = DockStyle.Bottom;
+            dgvCategory.Location = new Point(0, 61);
+            dgvCategory.Margin = new Padding(3, 4, 3, 4);
             dgvCategory.Name = "dgvCategory";
-            dgvCategory.Size = new Size(803, 296);
+            dgvCategory.RowHeadersWidth = 51;
+            dgvCategory.Size = new Size(1092, 538);
             dgvCategory.TabIndex = 0;
             dgvCategory.CellContentClick += dgvCategory_CellContentClick;
             // 
             // ColNo
             // 
             ColNo.HeaderText = "No";
+            ColNo.MinimumWidth = 6;
             ColNo.Name = "ColNo";
             // 
             // ColCatId
             // 
             ColCatId.HeaderText = "Cat ID";
+            ColCatId.MinimumWidth = 6;
             ColCatId.Name = "ColCatId";
             ColCatId.Visible = false;
             // 
             // ColCatName
             // 
             ColCatName.HeaderText = "Category Name";
+            ColCatName.MinimumWidth = 6;
             ColCatName.Name = "ColCatName";
-            ColCatName.Width = 250;
             // 
             // Edit
             // 
             Edit.DataPropertyName = "Edit";
             Edit.HeaderText = "Edit";
+            Edit.MinimumWidth = 6;
             Edit.Name = "Edit";
             Edit.Text = "Edit";
-            Edit.UseColumnTextForButtonValue = true;
             Edit.ToolTipText = "Edit";
+            Edit.UseColumnTextForButtonValue = true;
             // 
             // Delete
             // 
             Delete.HeaderText = "Delete";
+            Delete.MinimumWidth = 6;
             Delete.Name = "Delete";
             Delete.Text = "Delete";
-            Delete.UseColumnTextForButtonValue = true;
             Delete.ToolTipText = "Delete";
+            Delete.UseColumnTextForButtonValue = true;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(12, 12);
+            btnAdd.Location = new Point(14, 16);
+            btnAdd.Margin = new Padding(3, 4, 3, 4);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(141, 23);
+            btnAdd.Size = new Size(161, 31);
             btnAdd.TabIndex = 1;
             btnAdd.Text = "Add Category";
             btnAdd.UseVisualStyleBackColor = true;
@@ -96,11 +105,12 @@
             // 
             // CategoryForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1092, 599);
             Controls.Add(btnAdd);
             Controls.Add(dgvCategory);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CategoryForm";
             Text = "CategoryForm";
             ((System.ComponentModel.ISupportInitialize)dgvCategory).EndInit();
