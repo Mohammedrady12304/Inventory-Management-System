@@ -53,7 +53,7 @@
             btnExit.Cursor = Cursors.Hand;
             btnExit.FlatAppearance.BorderSize = 0;
             btnExit.FlatStyle = FlatStyle.Flat;
-            btnExit.Location = new Point(862, 3);
+            btnExit.Location = new Point(1345, 0);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(35, 30);
             btnExit.TabIndex = 10;
@@ -81,7 +81,7 @@
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(900, 70);
+            pnlHeader.Size = new Size(1380, 70);
             pnlHeader.TabIndex = 12;
             // 
             // btnLogout
@@ -90,7 +90,7 @@
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI Semibold", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = SystemColors.ControlDark;
-            btnLogout.Location = new Point(796, 0);
+            btnLogout.Location = new Point(1279, -3);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(60, 29);
             btnLogout.TabIndex = 0;
@@ -103,7 +103,7 @@
             lblWelcome.AutoSize = true;
             lblWelcome.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblWelcome.ForeColor = Color.MidnightBlue;
-            lblWelcome.Location = new Point(547, 23);
+            lblWelcome.Location = new Point(1030, 20);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(60, 28);
             lblWelcome.TabIndex = 13;
@@ -133,7 +133,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 70);
             panel1.Name = "panel1";
-            panel1.Size = new Size(225, 430);
+            panel1.Size = new Size(225, 650);
             panel1.TabIndex = 0;
             // 
             // button6
@@ -142,9 +142,9 @@
             button6.FlatAppearance.BorderSize = 0;
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
-            button6.Location = new Point(17, 286);
+            button6.Location = new Point(17, 444);
             button6.Name = "button6";
-            button6.Size = new Size(190, 57);
+            button6.Size = new Size(190, 75);
             button6.TabIndex = 23;
             button6.Text = "Customers";
             button6.UseVisualStyleBackColor = false;
@@ -156,9 +156,9 @@
             button5.FlatAppearance.BorderSize = 0;
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
-            button5.Location = new Point(17, 349);
+            button5.Location = new Point(17, 551);
             button5.Name = "button5";
-            button5.Size = new Size(190, 56);
+            button5.Size = new Size(190, 75);
             button5.TabIndex = 22;
             button5.Text = "Users";
             button5.UseVisualStyleBackColor = false;
@@ -170,9 +170,9 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
-            button4.Location = new Point(17, 222);
+            button4.Location = new Point(17, 339);
             button4.Name = "button4";
-            button4.Size = new Size(190, 58);
+            button4.Size = new Size(190, 75);
             button4.TabIndex = 21;
             button4.Text = "Orders";
             button4.UseVisualStyleBackColor = false;
@@ -184,9 +184,9 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
-            button3.Location = new Point(17, 155);
+            button3.Location = new Point(17, 239);
             button3.Name = "button3";
-            button3.Size = new Size(190, 61);
+            button3.Size = new Size(190, 75);
             button3.TabIndex = 20;
             button3.Text = "Categories";
             button3.UseVisualStyleBackColor = false;
@@ -198,9 +198,9 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
-            button2.Location = new Point(17, 93);
+            button2.Location = new Point(17, 134);
             button2.Name = "button2";
-            button2.Size = new Size(190, 56);
+            button2.Size = new Size(190, 75);
             button2.TabIndex = 19;
             button2.Text = "Products";
             button2.UseVisualStyleBackColor = false;
@@ -212,9 +212,9 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
-            button1.Location = new Point(17, 26);
+            button1.Location = new Point(17, 32);
             button1.Name = "button1";
-            button1.Size = new Size(190, 61);
+            button1.Size = new Size(190, 75);
             button1.TabIndex = 18;
             button1.Text = "Dashboard";
             button1.UseVisualStyleBackColor = false;
@@ -225,14 +225,14 @@
             pnlMain.Dock = DockStyle.Fill;
             pnlMain.Location = new Point(225, 70);
             pnlMain.Name = "pnlMain";
-            pnlMain.Size = new Size(675, 430);
+            pnlMain.Size = new Size(1155, 650);
             pnlMain.TabIndex = 13;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(900, 500);
+            ClientSize = new Size(1380, 720);
             Controls.Add(pnlMain);
             Controls.Add(panel1);
             Controls.Add(pnlHeader);
