@@ -75,6 +75,7 @@ namespace Windows_Forms.Forms
                         db.SaveChanges();
                         MessageBox.Show("Category has been successfully updated!");
                         this.Dispose();
+                        //this.Close();
                     }
                 }
             }
@@ -83,5 +84,7 @@ namespace Windows_Forms.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //todo: delete and DataGridView 
     }
 }

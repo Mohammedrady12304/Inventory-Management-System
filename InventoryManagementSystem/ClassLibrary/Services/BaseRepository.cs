@@ -15,7 +15,7 @@ namespace Class_Library.Services
             _dbSet = context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll() => _dbSet.ToList();
+        public IEnumerable<T> GetAll() => _dbSet.AsNoTracking().ToList();
 
         public T? GetById(object id) => _dbSet.Find(id);
 

@@ -1,4 +1,5 @@
 ﻿using Class_Library.Models;
+using InventoryManagementSystem.ClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,7 +74,7 @@ namespace Windows_Forms.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //openChildForm(new Category());
+            openChildForm(new CategoryForm());
         }
 
         private void button2_Click(object sender, EventArgs e)
