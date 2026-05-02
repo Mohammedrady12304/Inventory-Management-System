@@ -78,7 +78,7 @@ namespace Windows_Forms.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //openChildForm(new Product());
+            openChildForm(new ProductForm());
         }
 
         private void button1_Click(object sender, EventArgs e)
