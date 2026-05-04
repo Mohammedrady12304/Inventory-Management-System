@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Class_Library.Migrations
 {
     [DbContext(typeof(InventoryManagementContext))]
-    [Migration("20260429203953_Add Role")]
-    partial class AddRole
+    [Migration("20260504211559_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,10 +148,8 @@ namespace Class_Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pid"));
 
-                    b.Property<string>("pcategory")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int?>("catid")
+                        .HasColumnType("int");
 
                     b.Property<string>("pdescription")
                         .IsRequired()
@@ -171,19 +169,21 @@ namespace Class_Library.Migrations
 
                     b.HasKey("pid");
 
+                    b.HasIndex("catid");
+
                     b.ToTable("tbProduct");
                 });
 
             modelBuilder.Entity("InventoryManagementSystem.ClassLibrary.Models.Order", b =>
                 {
                     b.HasOne("InventoryManagementSystem.ClassLibrary.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("cid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("InventoryManagementSystem.ClassLibrary.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("pid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -191,6 +191,31 @@ namespace Class_Library.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("InventoryManagementSystem.ClassLibrary.Models.Product", b =>
+                {
+                    b.HasOne("InventoryManagementSystem.ClassLibrary.Models.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("catid")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("InventoryManagementSystem.ClassLibrary.Models.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("InventoryManagementSystem.ClassLibrary.Models.Customer", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("InventoryManagementSystem.ClassLibrary.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

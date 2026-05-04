@@ -1,5 +1,4 @@
-﻿using Class_Library.Context;
-using Class_Library.Services;
+﻿using Class_Library.Services;
 using InventoryManagementSystem.ClassLibrary.Models;
 
 namespace Windows_Forms.Forms
@@ -15,14 +14,15 @@ namespace Windows_Forms.Forms
             LoadCustomers();
         }
 
-        private void LoadCustomers()
+        public void LoadCustomers()
         {
+            int i = 0;
             dgvCustomer.Rows.Clear();
-            var customers = _customerRepo.GetAll().ToList();
-            int no = 1;
+            var customers = _customerRepo.SearchCustomers(txtSearch.Text);
             foreach (var c in customers)
             {
-                dgvCustomer.Rows.Add(no++, c.cname, c.cphone, "Edit", "Delete");
+                i++;
+                dgvCustomer.Rows.Add(i, c.cid, c.cname, c.cphone);
                 dgvCustomer.Rows[dgvCustomer.Rows.Count - 1].Tag = c;
             }
         }
@@ -37,35 +37,35 @@ namespace Windows_Forms.Forms
         private void dgvCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
+            string colName = dgvCustomer.Columns[e.ColumnIndex].Name;
             var customer = dgvCustomer.Rows[e.RowIndex].Tag as Customer;
             if (customer == null) return;
 
-            // Edit
-            if (e.ColumnIndex == dgvCustomer.Columns["Edit"].Index)
+            if (colName == "Edit")
             {
                 var moduleForm = new CustomerModuleForm();
                 moduleForm.LoadForEdit(customer);
                 moduleForm.FormClosed += (s, args) => LoadCustomers();
                 moduleForm.ShowDialog();
             }
-
-            // Delete
-            if (e.ColumnIndex == dgvCustomer.Columns["Delete"].Index)
+            else if (colName == "Delete")
             {
-                var confirm = MessageBox.Show(
-                    $"Are you sure you want to delete '{customer.cname}'?",
-                    "Confirm Delete",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (confirm == DialogResult.Yes)
+                if (MessageBox.Show($"Are you sure you want to delete '{customer.cname}'?",
+                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     _customerRepo.Delete(customer.cid);
                     _customerRepo.Save();
                     LoadCustomers();
                 }
             }
+            else if (colName == "ViewOrders")
+            {
+                var fullCustomer = _customerRepo.GetByIdWithOrders(customer.cid);
+                if (fullCustomer != null)
+                    new CustomerOrdersForm(fullCustomer).ShowDialog();
+            }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e) => LoadCustomers();
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Class_Library.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRole : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,23 +39,6 @@ namespace Class_Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbProduct",
-                columns: table => new
-                {
-                    pid = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    pname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    pqty = table.Column<int>(type: "int", nullable: false),
-                    pprice = table.Column<int>(type: "int", nullable: false),
-                    pdescription = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    pcategory = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbProduct", x => x.pid);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tbUser",
                 columns: table => new
                 {
@@ -68,6 +51,29 @@ namespace Class_Library.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbUser", x => x.username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbProduct",
+                columns: table => new
+                {
+                    pid = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    pname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    pqty = table.Column<int>(type: "int", nullable: false),
+                    pprice = table.Column<int>(type: "int", nullable: false),
+                    pdescription = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    catid = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbProduct", x => x.pid);
+                    table.ForeignKey(
+                        name: "FK_tbProduct_tbCategory_catid",
+                        column: x => x.catid,
+                        principalTable: "tbCategory",
+                        principalColumn: "catid",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,14 +120,16 @@ namespace Class_Library.Migrations
                 name: "IX_tbOrder_pid",
                 table: "tbOrder",
                 column: "pid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbProduct_catid",
+                table: "tbProduct",
+                column: "catid");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "tbCategory");
-
             migrationBuilder.DropTable(
                 name: "tbOrder");
 
@@ -133,6 +141,9 @@ namespace Class_Library.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbProduct");
+
+            migrationBuilder.DropTable(
+                name: "tbCategory");
         }
     }
 }
