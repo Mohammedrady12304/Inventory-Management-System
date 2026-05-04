@@ -1,77 +1,83 @@
 ﻿using Class_Library.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using InventoryManagementSystem.ClassLibrary.Models;
 
 namespace Windows_Forms.Forms
 {
     public partial class CategoryForm : Form
     {
         private readonly CategoryRepository _categoryRepo;
+
         public CategoryForm()
         {
             InitializeComponent();
             _categoryRepo = new CategoryRepository(Program.DbContext);
             LoadCategories();
         }
-    
+
         public void LoadCategories()
         {
             int i = 0;
             dgvCategory.Rows.Clear();
-            var categories = _categoryRepo.GetAll();
-            foreach (var category in categories)
+            foreach (var category in _categoryRepo.GetAll())
             {
                 i++;
                 dgvCategory.Rows.Add(i, category.catid, category.catname);
+                dgvCategory.Rows[dgvCategory.Rows.Count - 1].Tag = category;
             }
         }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            CategoryModuleForm categoryModuleForm = new CategoryModuleForm();
-            categoryModuleForm.btnUpdate.Enabled = false;
-            categoryModuleForm.btnSave.Enabled = true;
-            categoryModuleForm.ShowDialog();
-            LoadCategories();
+            var f = new CategoryModuleForm();
+            f.btnUpdate.Enabled = false; f.btnSave.Enabled = true;
+            f.ShowDialog(); LoadCategories();
         }
+
         private void dgvCategory_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
             string colName = dgvCategory.Columns[e.ColumnIndex].Name;
+            var category = dgvCategory.Rows[e.RowIndex].Tag as Category;
+            if (category == null) return;
 
             if (colName == "Edit")
             {
-                CategoryModuleForm categoryModule = new CategoryModuleForm();
-                categoryModule.lblCatId.Text = dgvCategory.Rows[e.RowIndex].Cells["ColCatId"].Value.ToString();
-                categoryModule.txtCatName.Text = dgvCategory.Rows[e.RowIndex].Cells["ColCatName"].Value.ToString();
-                categoryModule.btnSave.Enabled = false;
-                categoryModule.btnUpdate.Enabled = true;
-                categoryModule.ShowDialog();
-                LoadCategories();
+                var f = new CategoryModuleForm();
+                f.lblCatId.Text = category.catid.ToString();
+                f.txtCatName.Text = category.catname;
+                f.btnSave.Enabled = false; f.btnUpdate.Enabled = true;
+                f.ShowDialog(); LoadCategories();
             }
             else if (colName == "Delete")
             {
-                int catId = int.Parse(dgvCategory.Rows[e.RowIndex].Cells["ColCatId"].Value.ToString()!);
-                if (MessageBox.Show($"Are you sure you want to delete this category?",
-                    "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Delete '{category.catname}'? Products will be unlinked.",
+                    "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    _categoryRepo.Delete(catId);
+                    _categoryRepo.Delete(category.catid);
                     _categoryRepo.Save();
-                    MessageBox.Show("Category deleted successfully!");
+                    MessageBox.Show("Category deleted!");
+                    LoadCategories();
                 }
             }
-
-            LoadCategories();
+            else if (colName == "ViewProducts")
+            {
+                var fullCat = _categoryRepo.GetByIdWithProducts(category.catid);
+                if (fullCat != null) new CategoryProductsForm(fullCat).ShowDialog();
+            }
         }
 
-      
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text.ToLower();
+            dgvCategory.Rows.Clear();
+            int i = 0;
+            foreach (var cat in _categoryRepo.GetAll()
+                .Where(c => c.catname.ToLower().Contains(search) || c.catid.ToString().Contains(search)))
+            {
+                i++;
+                dgvCategory.Rows.Add(i, cat.catid, cat.catname);
+                dgvCategory.Rows[dgvCategory.Rows.Count - 1].Tag = cat;
+            }
+        }
     }
 }

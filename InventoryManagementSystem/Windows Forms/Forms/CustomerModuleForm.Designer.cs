@@ -3,87 +3,89 @@
     partial class CustomerModuleForm
     {
         private System.ComponentModel.IContainer components = null;
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-                components.Dispose();
+            if (disposing && (components != null)) components.Dispose();
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            txtName = new System.Windows.Forms.TextBox();
-            txtPhone = new System.Windows.Forms.TextBox();
-            btnSave = new System.Windows.Forms.Button();
-            btnUpdate = new System.Windows.Forms.Button();
-            btnClear = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(ProductModuleForm));
 
-            var lblName = new System.Windows.Forms.Label();
-            var lblPhone = new System.Windows.Forms.Label();
+            panel1 = new Panel();
+            pictureBoxClose = new PictureBox();
+            label1 = new Label();
+            label2 = new Label();
+            txtName = new TextBox();
+            label3 = new Label();
+            txtPhone = new TextBox();
+            btnSave = new Button();
+            btnUpdate = new Button();
+            btnClear = new Button();
 
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxClose).BeginInit();
             SuspendLayout();
 
-            // Labels
-            lblName.Text = "Full Name:";
-            lblName.Location = new System.Drawing.Point(30, 53);
-            lblName.Size = new System.Drawing.Size(100, 20);
+            panel1.BackColor = Color.DodgerBlue;
+            panel1.Controls.Add(pictureBoxClose); panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Top; panel1.Name = "panel1"; panel1.Size = new Size(602, 49);
 
-            lblPhone.Text = "Phone:";
-            lblPhone.Location = new System.Drawing.Point(30, 103);
-            lblPhone.Size = new System.Drawing.Size(100, 20);
+            try { pictureBoxClose.Image = (Image)resources.GetObject("pictureBoxClose.Image"); } catch { }
+            pictureBoxClose.Location = new Point(575, -1); pictureBoxClose.Name = "pictureBoxClose";
+            pictureBoxClose.Size = new Size(29, 27); pictureBoxClose.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxClose.Click += pictureBoxClose_Click;
 
-            // TextBoxes
-            txtName.Location = new System.Drawing.Point(160, 50);
-            txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(200, 27);
+            label1.AutoSize = true; label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White; label1.Location = new Point(5, 14); label1.Text = "Customer Module";
 
-            txtPhone.Location = new System.Drawing.Point(160, 100);
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new System.Drawing.Size(200, 27);
+            label2.AutoSize = true; label2.Location = new Point(30, 83); label2.Text = "Full Name :";
+            txtName.Location = new Point(152, 80); txtName.Name = "txtName"; txtName.Size = new Size(396, 22);
 
-            // Buttons
-            btnSave.Location = new System.Drawing.Point(50, 160);
-            btnSave.Name = "btnSave";
-            btnSave.Text = "Save";
-            btnSave.Size = new System.Drawing.Size(90, 30);
-            btnSave.Click += btnSave_Click;
+            label3.AutoSize = true; label3.Location = new Point(30, 133); label3.Text = "Phone :";
+            txtPhone.Location = new Point(152, 130); txtPhone.Name = "txtPhone"; txtPhone.Size = new Size(396, 22);
 
-            btnUpdate.Location = new System.Drawing.Point(160, 160);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Text = "Update";
-            btnUpdate.Size = new System.Drawing.Size(90, 30);
-            btnUpdate.Click += btnUpdate_Click;
+            btnSave.BackColor = Color.FromArgb(0, 64, 0); btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatStyle = FlatStyle.Flat; btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(152, 185); btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 37); btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false; btnSave.Click += btnSave_Click;
 
-            btnClear.Location = new System.Drawing.Point(270, 160);
-            btnClear.Name = "btnClear";
-            btnClear.Text = "Clear";
-            btnClear.Size = new System.Drawing.Size(90, 30);
-            btnClear.Click += btnClear_Click;
+            btnUpdate.BackColor = Color.Olive; btnUpdate.FlatAppearance.BorderSize = 0;
+            btnUpdate.FlatStyle = FlatStyle.Flat; btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(252, 185); btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(94, 37); btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false; btnUpdate.Click += btnUpdate_Click;
 
-            // Form
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(420, 230);
-            Controls.Add(lblName);
-            Controls.Add(lblPhone);
-            Controls.Add(txtName);
-            Controls.Add(txtPhone);
-            Controls.Add(btnSave);
-            Controls.Add(btnUpdate);
-            Controls.Add(btnClear);
-            Name = "CustomerModuleForm";
-            Text = "Customer Module";
-            ResumeLayout(false);
-            PerformLayout();
+            btnClear.BackColor = Color.Red; btnClear.FlatAppearance.BorderSize = 0;
+            btnClear.FlatStyle = FlatStyle.Flat; btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(352, 185); btnClear.Name = "btnClear";
+            btnClear.Size = new Size(94, 37); btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false; btnClear.Click += btnClear_Click;
+
+            AutoScaleDimensions = new SizeF(7F, 17F); AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(602, 250);
+            Controls.Add(panel1); Controls.Add(label2); Controls.Add(txtName);
+            Controls.Add(label3); Controls.Add(txtPhone);
+            Controls.Add(btnSave); Controls.Add(btnUpdate); Controls.Add(btnClear);
+            Font = new Font("Century Gothic", 9F); FormBorderStyle = FormBorderStyle.None;
+            StartPosition = FormStartPosition.CenterScreen;
+            Name = "CustomerModuleForm"; Text = "Customer Module";
+
+            panel1.ResumeLayout(false); panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxClose).EndInit();
+            ResumeLayout(false); PerformLayout();
         }
-        #endregion
 
-        public System.Windows.Forms.TextBox txtName;
-        public System.Windows.Forms.TextBox txtPhone;
-        public System.Windows.Forms.Button btnSave;
-        public System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnClear;
+        private Panel panel1;
+        private PictureBox pictureBoxClose;
+        private Label label1, label2, label3;
+        public TextBox txtName;
+        public TextBox txtPhone;
+        public Button btnSave;
+        public Button btnUpdate;
+        private Button btnClear;
     }
 }

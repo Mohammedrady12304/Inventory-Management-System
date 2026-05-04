@@ -1,18 +1,16 @@
-
-using Class_Library.Context;
 using Class_Library.Services;
 using InventoryManagementSystem.ClassLibrary.Models;
-using Microsoft.EntityFrameworkCore;
 
-namespace  Windows_Forms.Forms
+namespace Windows_Forms.Forms
 {
     public partial class ProductForm : Form
     {
-        private InventoryManagementContext db = new InventoryManagementContext();
+        private readonly ProductRepository _productRepo;
 
         public ProductForm()
         {
             InitializeComponent();
+            _productRepo = new ProductRepository(Program.DbContext);
             LoadProduct();
         }
 
@@ -20,37 +18,13 @@ namespace  Windows_Forms.Forms
         {
             int i = 0;
             dgvProduct.Rows.Clear();
-
-            string search = txtSearch.Text.ToLower();
-
-
-            db = new InventoryManagementContext();
-
-            var products = db.Products
-                .AsNoTracking()
-                .Where(p =>
-                    p.pid.ToString().Contains(search) ||
-                    p.pname.ToLower().Contains(search) ||
-                    p.pprice.ToString().Contains(search) ||
-                    p.pdescription.ToLower().Contains(search) ||
-                    p.pcategory.ToLower().Contains(search))
-                .ToList();
-
+            var products = _productRepo.SearchProducts(txtSearch.Text);
             foreach (var p in products)
             {
                 i++;
-                dgvProduct.Rows.Add(
-                    i,
-                    p.pid.ToString(),
-                    p.pname,
-                    p.pqty.ToString(),
-                    p.pprice.ToString(),
-                    p.pdescription,
-                    p.pcategory);
+                dgvProduct.Rows.Add(i, p.pid, p.pname, p.pqty, p.pprice, p.pdescription, p.Category?.catname ?? "—");
             }
         }
-
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -63,6 +37,7 @@ namespace  Windows_Forms.Forms
 
         private void dgvProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             string colName = dgvProduct.Columns[e.ColumnIndex].Name;
 
             if (colName == "Edit")
@@ -74,7 +49,6 @@ namespace  Windows_Forms.Forms
                 productModule.txtPPrice.Text = dgvProduct.Rows[e.RowIndex].Cells[4].Value.ToString();
                 productModule.txtPDes.Text = dgvProduct.Rows[e.RowIndex].Cells[5].Value.ToString();
                 productModule.comboCat.Text = dgvProduct.Rows[e.RowIndex].Cells[6].Value.ToString();
-
                 productModule.btnSave.Enabled = false;
                 productModule.btnUpdate.Enabled = true;
                 productModule.ShowDialog();
@@ -84,26 +58,15 @@ namespace  Windows_Forms.Forms
                 if (MessageBox.Show("Are you sure you want to delete this product?",
                     "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int pid = int.Parse(dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString());
-                    var product = db.Products.Find(pid);
-
-                    if (product != null)
-                    {
-                        db.Products.Remove(product);
-                        db.SaveChanges();
-                        MessageBox.Show("Record has been successfully deleted!");
-                    }
+                    int pid = int.Parse(dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString()!);
+                    _productRepo.Delete(pid);
+                    _productRepo.Save();
+                    MessageBox.Show("Record has been successfully deleted!");
                 }
             }
-
             LoadProduct();
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadProduct();
-        }
-
-       
+        private void txtSearch_TextChanged(object sender, EventArgs e) => LoadProduct();
     }
 }

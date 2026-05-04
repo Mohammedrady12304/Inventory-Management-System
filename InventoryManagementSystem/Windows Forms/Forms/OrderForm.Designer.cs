@@ -139,6 +139,9 @@
             Delete.UseColumnTextForButtonValue = true;
             Delete.Width = 5;
 
+            Delete.FlatStyle = FlatStyle.Flat;
+            Delete.DefaultCellStyle.BackColor = Color.Crimson; Delete.DefaultCellStyle.ForeColor = Color.White;
+
             // panel1
             panel1.BackColor = Color.DodgerBlue;
             panel1.Controls.Add(lblTotal);

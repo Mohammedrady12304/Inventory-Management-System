@@ -1,5 +1,3 @@
-
-using Class_Library.Context;
 using Class_Library.Services;
 using InventoryManagementSystem.ClassLibrary.Models;
 
@@ -7,69 +5,62 @@ namespace Windows_Forms.Forms
 {
     public partial class ProductModuleForm : Form
     {
-        private InventoryManagementContext db = new InventoryManagementContext();
+        private readonly ProductRepository _productRepo;
+        private readonly CategoryRepository _categoryRepo;
 
         public ProductModuleForm()
         {
             InitializeComponent();
+            _productRepo = new ProductRepository(Program.DbContext);
+            _categoryRepo = new CategoryRepository(Program.DbContext);
             LoadCategory();
         }
 
         public void LoadCategory()
         {
-            comboCat.Items.Clear();
-
-            var categories = db.Categories
-                .Select(c => c.catname)
-                .ToList();
-
-            foreach (var cat in categories)
-            {
-                comboCat.Items.Add(cat);
-            }
+            comboCat.DisplayMember = "catname";
+            comboCat.ValueMember = "catid";
+            comboCat.DataSource = _categoryRepo.GetAll().ToList();
         }
 
-        private void pictureBoxClose_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
+        private void pictureBoxClose_Click(object sender, EventArgs e) => this.Dispose();
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(txtPName.Text))
+                {
+                    MessageBox.Show("Please enter product name.", "Validation",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (MessageBox.Show("Are you sure you want to save this product?",
                     "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    var selectedCat = comboCat.SelectedItem as Category;
                     var newProduct = new Product
                     {
                         pname = txtPName.Text,
-                        pqty = Convert.ToInt16(txtPQty.Text),
-                        pprice = (int)Convert.ToDecimal(txtPPrice.Text),
+                        pqty = Convert.ToInt32(txtPQty.Text),
+                        pprice = Convert.ToInt32(txtPPrice.Text),
                         pdescription = txtPDes.Text,
-                        pcategory = comboCat.Text
+                        catid = selectedCat?.catid
                     };
-
-                    db.Products.Add(newProduct);
-                    db.SaveChanges();
-
+                    _productRepo.Add(newProduct);
+                    _productRepo.Save();
                     MessageBox.Show("Product has been successfully saved.");
                     Clear();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         public void Clear()
         {
-            txtPName.Clear();
-            txtPQty.Clear();
-            txtPPrice.Clear();
-            txtPDes.Clear();
-            comboCat.Text = "";
+            txtPName.Clear(); txtPQty.Clear(); txtPPrice.Clear(); txtPDes.Clear();
+            if (comboCat.Items.Count > 0) comboCat.SelectedIndex = 0;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -87,31 +78,25 @@ namespace Windows_Forms.Forms
                     "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int pid = int.Parse(lblPid.Text);
-                    var product = db.Products.Find(pid);
-
+                    var product = _productRepo.GetById(pid);
                     if (product != null)
                     {
+                        var selectedCat = comboCat.SelectedItem as Category;
                         product.pname = txtPName.Text;
-                        product.pqty = Convert.ToInt16(txtPQty.Text);
-                        product.pprice =(int) Convert.ToDecimal(txtPPrice.Text);
+                        product.pqty = Convert.ToInt32(txtPQty.Text);
+                        product.pprice = Convert.ToInt32(txtPPrice.Text);
                         product.pdescription = txtPDes.Text;
-                        product.pcategory = comboCat.Text;
-
-                        db.SaveChanges();
+                        product.catid = selectedCat?.catid;
+                        _productRepo.Update(product);
+                        _productRepo.Save();
                         MessageBox.Show("Product has been successfully updated!");
                         this.Dispose();
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void comboCat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void comboCat_SelectedIndexChanged(object sender, EventArgs e) { }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.ClassLibrary.Models
 {
@@ -25,7 +21,18 @@ namespace InventoryManagementSystem.ClassLibrary.Models
         [StringLength(255)]
         public string pdescription { get; set; } = string.Empty;
 
-        [StringLength(100)]
-        public string pcategory { get; set; } = string.Empty;
+        // FK to Category (1:M)
+        [ForeignKey("Category")]
+        public int? catid { get; set; }
+
+        //[ForeignKey("catid")]
+        public virtual Category? Category { get; set; }
+
+        // Computed for display only — not stored in DB
+        [NotMapped]
+        public string pcategory => Category?.catname ?? string.Empty;
+
+        // One Product -> Many Orders
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
