@@ -1,63 +1,131 @@
 ﻿using Class_Library.Models;
 using Class_Library.Services;
-using System;
-using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Windows_Forms.Forms
 {
     public partial class UserModuleForm : Form
     {
         private readonly UserRepository _userRepo;
+        private ErrorProvider errorProvider;
 
         public UserModuleForm()
         {
             InitializeComponent();
+
             _userRepo = new UserRepository(Program.DbContext);
+
+            errorProvider = new ErrorProvider();
+            errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
         }
+
+        // ================= VALIDATION METHODS =================
+
+        private bool IsValidName(string input)
+        {
+            return Regex.IsMatch(input, @"^[a-zA-Z\s]+$");
+        }
+
+        private bool IsValidPhone(string phone)
+        {
+            return Regex.IsMatch(phone, @"^(010|011|012|015)\d{8}$");
+        }
+
+        // ================= VALIDATE ALL INPUTS =================
+
+        private bool ValidateInputs()
+        {
+            bool isValid = true;
+            errorProvider.Clear();
+
+            // Username
+            if (string.IsNullOrWhiteSpace(txtUserName.Text))
+            {
+                errorProvider.SetError(txtUserName, "Username is required");
+                isValid = false;
+            }
+            else if (!IsValidName(txtUserName.Text))
+            {
+                errorProvider.SetError(txtUserName, "Username must contain letters only");
+                isValid = false;
+            }
+
+            // Full Name
+            if (string.IsNullOrWhiteSpace(txtFullName.Text))
+            {
+                errorProvider.SetError(txtFullName, "Full name is required");
+                isValid = false;
+            }
+            else if (!IsValidName(txtFullName.Text))
+            {
+                errorProvider.SetError(txtFullName, "Full name must contain letters only");
+                isValid = false;
+            }
+
+            // Phone
+            if (!IsValidPhone(txtPhone.Text))
+            {
+                errorProvider.SetError(txtPhone, "Phone must be 010/011/012/015 + 8 digits");
+                isValid = false;
+            }
+
+            // Password
+            if (string.IsNullOrWhiteSpace(txtPass.Text))
+            {
+                errorProvider.SetError(txtPass, "Password is required");
+                isValid = false;
+            }
+
+            // Re-password
+            if (txtPass.Text != txtRepass.Text)
+            {
+                errorProvider.SetError(txtRepass, "Passwords do not match");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // ================= EVENTS =================
+
+        private void pictureBoxClose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        // ================= SAVE =================
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtUserName.Text) ||
-                string.IsNullOrWhiteSpace(txtFullName.Text) ||
-                string.IsNullOrWhiteSpace(txtPass.Text))
-            {
-                MessageBox.Show("Please fill all required fields.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!ValidateInputs())
                 return;
-            }
-
-            if (txtPass.Text != txtRepass.Text)
-            {
-                MessageBox.Show("Password did not match!", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             if (_userRepo.UsernameExists(txtUserName.Text))
             {
-                MessageBox.Show("Username already exists!", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider.SetError(txtUserName, "Username already exists");
                 return;
             }
 
-            if (MessageBox.Show("Are you sure you want to save this user?", "Saving Record",
+            if (MessageBox.Show("Save this user?", "Confirm",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    var newUser = new User
+                    _userRepo.Add(new User
                     {
-                        username = txtUserName.Text,
-                        fullname = txtFullName.Text,
+                        username = txtUserName.Text.Trim(),
+                        fullname = txtFullName.Text.Trim(),
                         password = txtPass.Text,
-                        phone = txtPhone.Text
-                    };
+                        phone = txtPhone.Text.Trim(),
+                        role = cmbRole.SelectedIndex == 0 ? UserRole.Admin : UserRole.User
+                    });
 
-                    _userRepo.Add(newUser);
                     _userRepo.Save();
-                    MessageBox.Show("User has been successfully saved.");
+
                     Clear();
                     this.Close();
+
+                    MessageBox.Show("User saved successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -65,38 +133,39 @@ namespace Windows_Forms.Forms
                 }
             }
         }
+
+        // ================= UPDATE =================
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (txtPass.Text != txtRepass.Text)
-            {
-                MessageBox.Show("Password did not match!", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!ValidateInputs())
                 return;
-            }
 
-            if (MessageBox.Show("Are you sure you want to update this user?", "Update Record",
+            if (MessageBox.Show("Update this user?", "Confirm",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    var existingUser = _userRepo.GetById(txtUserName.Text);
+                    var user = _userRepo.GetById(txtUserName.Text);
 
-                    if (existingUser == null)
+                    if (user == null)
                     {
-                        MessageBox.Show("User not found!", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("User not found!");
                         return;
                     }
 
-                    existingUser.fullname = txtFullName.Text;
-                    existingUser.password = txtPass.Text;
-                    existingUser.phone = txtPhone.Text;
+                    user.fullname = txtFullName.Text.Trim();
+                    user.password = txtPass.Text;
+                    user.phone = txtPhone.Text.Trim();
+                    user.role = cmbRole.SelectedIndex == 0 ? UserRole.Admin : UserRole.User;
 
-                    _userRepo.Update(existingUser);
+                    _userRepo.Update(user);
                     _userRepo.Save();
-                    MessageBox.Show("User has been successfully updated!");
+
+                    Clear();
                     this.Close();
+
+                    MessageBox.Show("User updated successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -104,6 +173,8 @@ namespace Windows_Forms.Forms
                 }
             }
         }
+
+        // ================= CLEAR =================
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -119,6 +190,41 @@ namespace Windows_Forms.Forms
             txtPass.Clear();
             txtRepass.Clear();
             txtPhone.Clear();
+
+            cmbRole.SelectedIndex = 1;
+
+            errorProvider.Clear();
+        }
+
+        // ================= OPTIONAL UX IMPROVEMENTS =================
+
+        private void txtUserName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtFullName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) &&
+                !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

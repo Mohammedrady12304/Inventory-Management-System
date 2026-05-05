@@ -7,9 +7,7 @@ namespace Class_Library.Context
     public class InventoryManagementContext : DbContext
     {
         public InventoryManagementContext(DbContextOptions<InventoryManagementContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public InventoryManagementContext() { }
 
@@ -24,13 +22,34 @@ namespace Class_Library.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=.;Database=dbIMS;Integrated Security=True;TrustServerCertificate=True;"
+                    @"Server=.;Database=InventoryManagementSystem;Integrated Security=True;TrustServerCertificate=True;"
                 );
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Category -> Product (1:M)
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.catid)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Customer -> Order (1:M) — Customer:Product is M:M through Order
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Customer)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.cid)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Product -> Order (1:M)
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Product)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(o => o.pid)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<User>().HasData(new User
             {
                 username = "admin",

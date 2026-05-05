@@ -1,0 +1,324 @@
+﻿namespace Windows_Forms.Forms
+{
+    partial class DashboardForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            panel1 = new Panel();
+            pictureBox2 = new PictureBox();
+            lblTotalProducts = new Label();
+            lbl = new Label();
+            panel2 = new Panel();
+            pictureBox1 = new PictureBox();
+            lblTotalCustomers = new Label();
+            L1 = new Label();
+            panel3 = new Panel();
+            pictureBox4 = new PictureBox();
+            lblLowStock = new Label();
+            l3 = new Label();
+            panel4 = new Panel();
+            pictureBox3 = new PictureBox();
+            lblTodayOrders = new Label();
+            l2 = new Label();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            label5 = new Label();
+            label2 = new Label();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(pictureBox2);
+            panel1.Controls.Add(lblTotalProducts);
+            panel1.Controls.Add(lbl);
+            panel1.Location = new Point(37, 324);
+            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(220, 170);
+            panel1.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.productCart;
+            pictureBox2.Location = new Point(77, 23);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(43, 36);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 6;
+            pictureBox2.TabStop = false;
+            // 
+            // lblTotalProducts
+            // 
+            lblTotalProducts.AutoSize = true;
+            lblTotalProducts.Font = new Font("SimSun-ExtB", 13.8F, FontStyle.Bold);
+            lblTotalProducts.ForeColor = Color.MidnightBlue;
+            lblTotalProducts.Location = new Point(97, 121);
+            lblTotalProducts.Name = "lblTotalProducts";
+            lblTotalProducts.Size = new Size(88, 23);
+            lblTotalProducts.TabIndex = 5;
+            lblTotalProducts.Text = "Total ";
+            // 
+            // lbl
+            // 
+            lbl.AutoSize = true;
+            lbl.Font = new Font("SimSun-ExtB", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl.ForeColor = SystemColors.ButtonShadow;
+            lbl.Location = new Point(33, 77);
+            lbl.Name = "lbl";
+            lbl.Size = new Size(148, 18);
+            lbl.TabIndex = 4;
+            lbl.Text = "Total Products";
+            lbl.Click += lbl_Click;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.White;
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(lblTotalCustomers);
+            panel2.Controls.Add(L1);
+            panel2.Location = new Point(314, 324);
+            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(220, 170);
+            panel2.TabIndex = 1;
+            panel2.Paint += panel2_Paint;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.UserIcon;
+            pictureBox1.Location = new Point(84, 23);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(43, 36);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
+            // lblTotalCustomers
+            // 
+            lblTotalCustomers.AutoSize = true;
+            lblTotalCustomers.Font = new Font("SimSun-ExtB", 13.8F, FontStyle.Bold);
+            lblTotalCustomers.ForeColor = Color.MidnightBlue;
+            lblTotalCustomers.Location = new Point(94, 121);
+            lblTotalCustomers.Name = "lblTotalCustomers";
+            lblTotalCustomers.Size = new Size(75, 23);
+            lblTotalCustomers.TabIndex = 1;
+            lblTotalCustomers.Text = "Total";
+            lblTotalCustomers.Click += lblTotalCustomers_Click;
+            // 
+            // L1
+            // 
+            L1.AutoSize = true;
+            L1.Font = new Font("SimSun-ExtB", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            L1.ForeColor = SystemColors.ButtonShadow;
+            L1.Location = new Point(23, 77);
+            L1.Name = "L1";
+            L1.Size = new Size(158, 18);
+            L1.TabIndex = 0;
+            L1.Text = "Total Customers";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.White;
+            panel3.Controls.Add(pictureBox4);
+            panel3.Controls.Add(lblLowStock);
+            panel3.Controls.Add(l3);
+            panel3.Location = new Point(864, 324);
+            panel3.Margin = new Padding(3, 4, 3, 4);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(220, 170);
+            panel3.TabIndex = 2;
+            panel3.Paint += panel3_Paint;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = Properties.Resources.StocklowIcon;
+            pictureBox4.Location = new Point(88, 23);
+            pictureBox4.Margin = new Padding(3, 4, 3, 4);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(43, 36);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 3;
+            pictureBox4.TabStop = false;
+            // 
+            // lblLowStock
+            // 
+            lblLowStock.AutoSize = true;
+            lblLowStock.Font = new Font("SimSun-ExtB", 13.8F, FontStyle.Bold);
+            lblLowStock.ForeColor = Color.MidnightBlue;
+            lblLowStock.Location = new Point(88, 121);
+            lblLowStock.Name = "lblLowStock";
+            lblLowStock.Size = new Size(75, 23);
+            lblLowStock.TabIndex = 2;
+            lblLowStock.Text = "Total";
+            // 
+            // l3
+            // 
+            l3.AutoSize = true;
+            l3.Font = new Font("SimSun-ExtB", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            l3.ForeColor = SystemColors.ButtonShadow;
+            l3.Location = new Point(40, 75);
+            l3.Name = "l3";
+            l3.Size = new Size(108, 18);
+            l3.TabIndex = 1;
+            l3.Text = "Low Stocks";
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.Controls.Add(pictureBox3);
+            panel4.Controls.Add(lblTodayOrders);
+            panel4.Controls.Add(l2);
+            panel4.Location = new Point(587, 324);
+            panel4.Margin = new Padding(3, 4, 3, 4);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(220, 170);
+            panel4.TabIndex = 3;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.ReceiptIcon;
+            pictureBox3.Location = new Point(84, 23);
+            pictureBox3.Margin = new Padding(3, 4, 3, 4);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(43, 36);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 3;
+            pictureBox3.TabStop = false;
+            // 
+            // lblTodayOrders
+            // 
+            lblTodayOrders.AutoSize = true;
+            lblTodayOrders.Font = new Font("SimSun-ExtB", 13.8F, FontStyle.Bold);
+            lblTodayOrders.ForeColor = Color.MidnightBlue;
+            lblTodayOrders.Location = new Point(84, 121);
+            lblTodayOrders.Name = "lblTodayOrders";
+            lblTodayOrders.Size = new Size(75, 23);
+            lblTodayOrders.TabIndex = 2;
+            lblTodayOrders.Text = "Total";
+            // 
+            // l2
+            // 
+            l2.AutoSize = true;
+            l2.Font = new Font("SimSun-ExtB", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            l2.ForeColor = SystemColors.ButtonShadow;
+            l2.Location = new Point(28, 75);
+            l2.Name = "l2";
+            l2.Size = new Size(128, 18);
+            l2.TabIndex = 1;
+            l2.Text = "Today Orders";
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("SimSun-ExtB", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.MidnightBlue;
+            label5.Location = new Point(429, 111);
+            label5.Name = "label5";
+            label5.Size = new Size(297, 37);
+            label5.TabIndex = 4;
+            label5.Text = "Store Overview";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(350, 196);
+            label2.Name = "label2";
+            label2.Size = new Size(427, 40);
+            label2.TabIndex = 5;
+            label2.Text = "Welcome back! Here is what's happening\r\n         with Grocerease today";
+            label2.Click += label2_Click;
+            // 
+            // DashboardForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(1121, 600);
+            Controls.Add(label2);
+            Controls.Add(label5);
+            Controls.Add(panel4);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Name = "DashboardForm";
+            Text = "DashboardForm";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
+        private Panel panel4;
+        private Label lbl;
+        private Label L1;
+        private Label l3;
+        private Label l2;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private Label lblTotalProducts;
+        private Label lblTotalCustomers;
+        private Label lblLowStock;
+        private Label lblTodayOrders;
+        private Label label5;
+        private Label label2;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+    }
+}

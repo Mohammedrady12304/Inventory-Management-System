@@ -1,15 +1,14 @@
-﻿using Class_Library.Context;
-using Class_Library.Services;
+﻿using Class_Library.Services;
 using InventoryManagementSystem.ClassLibrary.Models;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace Windows_Forms.Forms
 {
     public partial class CustomerModuleForm : Form
     {
         private readonly CustomerRepository _customerRepo;
-        [System.ComponentModel.Browsable(false)]
-        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectedCustomerId { get; set; } = 0;
 
         public CustomerModuleForm()
@@ -69,17 +68,11 @@ namespace Windows_Forms.Forms
 
             var customer = new Customer
             {
-                cname = txtName.Text.Trim(),
-                cphone = txtPhone.Text.Trim()
-            };
-
-            _customerRepo.Add(customer);
-            _customerRepo.Save();
-
-            MessageBox.Show("Customer saved successfully.", "Success",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            ClearFields();
+                _customerRepo.Add(new Customer { cname = txtName.Text.Trim(), cphone = txtPhone.Text.Trim() });
+                _customerRepo.Save();
+                MessageBox.Show("Customer saved successfully.");
+                this.Close();
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -104,16 +97,9 @@ namespace Windows_Forms.Forms
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearFields();
-        }
-
-        private void ClearFields()
-        {
-            txtName.Clear();
-            txtPhone.Clear();
+            txtName.Clear(); txtPhone.Clear();
             SelectedCustomerId = 0;
-            btnSave.Enabled = true;
-            btnUpdate.Enabled = false;
+            btnSave.Enabled = true; btnUpdate.Enabled = false;
         }
 
         public void LoadForEdit(Customer customer)

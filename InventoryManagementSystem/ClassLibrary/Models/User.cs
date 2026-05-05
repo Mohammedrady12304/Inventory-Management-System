@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace Class_Library.Models
 {
+    public enum UserRole
+    {
+        Admin,
+        User
+    }
     [Table("tbUser")]
     public class User
     {
@@ -23,5 +28,7 @@ namespace Class_Library.Models
 
         [StringLength(20)]
         public string phone { get; set; } = string.Empty;
+
+        public UserRole role { get; set; } = UserRole.User;
     }
 }
