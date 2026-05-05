@@ -69,7 +69,7 @@ namespace Windows_Forms.Forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-            openChildForm(new OrderForm()); 
+            openChildForm(new OrderForm());
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -117,6 +117,11 @@ namespace Windows_Forms.Forms
         }
 
         private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
         }

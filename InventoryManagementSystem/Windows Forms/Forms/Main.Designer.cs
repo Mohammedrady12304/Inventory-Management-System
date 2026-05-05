@@ -136,6 +136,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(225, 650);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint_1;
             // 
             // button6
             // 
