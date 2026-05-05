@@ -1,14 +1,15 @@
-﻿using Class_Library.Services;
+﻿using Class_Library.Context;
+using Class_Library.Services;
 using InventoryManagementSystem.ClassLibrary.Models;
 using System.Text.RegularExpressions;
-using System.ComponentModel;
 
 namespace Windows_Forms.Forms
 {
     public partial class CustomerModuleForm : Form
     {
         private readonly CustomerRepository _customerRepo;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public int SelectedCustomerId { get; set; } = 0;
 
         public CustomerModuleForm()
@@ -68,11 +69,17 @@ namespace Windows_Forms.Forms
 
             var customer = new Customer
             {
-                _customerRepo.Add(new Customer { cname = txtName.Text.Trim(), cphone = txtPhone.Text.Trim() });
-                _customerRepo.Save();
-                MessageBox.Show("Customer saved successfully.");
-                this.Close();
-            }
+                cname = txtName.Text.Trim(),
+                cphone = txtPhone.Text.Trim()
+            };
+
+            _customerRepo.Add(customer);
+            _customerRepo.Save();
+
+            MessageBox.Show("Customer saved successfully.", "Success",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            ClearFields();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -97,11 +104,20 @@ namespace Windows_Forms.Forms
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtName.Clear(); txtPhone.Clear();
-            SelectedCustomerId = 0;
-            btnSave.Enabled = true; btnUpdate.Enabled = false;
+            ClearFields();
         }
 
+        private void ClearFields()
+        {
+            txtName.Clear();
+            txtPhone.Clear();
+            SelectedCustomerId = 0;
+            btnSave.Enabled = true;
+            btnUpdate.Enabled = false;
+
+        }
+
+        private void pictureBoxClose_Click(object sender, EventArgs e) => this.Dispose();
         public void LoadForEdit(Customer customer)
         {
             SelectedCustomerId = customer.cid;

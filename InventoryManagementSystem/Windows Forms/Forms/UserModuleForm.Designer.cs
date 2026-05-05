@@ -12,7 +12,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources =
-                new System.ComponentModel.ComponentResourceManager(typeof(ProductModuleForm));
+                new System.ComponentModel.ComponentResourceManager(typeof(UserModuleForm));
 
             panel1 = new Panel(); pictureBoxClose = new PictureBox(); label1 = new Label();
             label2 = new Label(); txtUserName = new TextBox();

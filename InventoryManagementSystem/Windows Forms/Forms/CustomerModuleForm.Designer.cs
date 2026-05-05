@@ -33,7 +33,7 @@
             panel1.Controls.Add(pictureBoxClose); panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top; panel1.Name = "panel1"; panel1.Size = new Size(602, 49);
 
-            try { pictureBoxClose.Image = (Image)resources.GetObject("pictureBoxClose.Image"); } catch { }
+            pictureBoxClose.Image = (Image)resources.GetObject("pictureBoxClose.Image"); 
             pictureBoxClose.Location = new Point(575, -1); pictureBoxClose.Name = "pictureBoxClose";
             pictureBoxClose.Size = new Size(29, 27); pictureBoxClose.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxClose.Click += pictureBoxClose_Click;
