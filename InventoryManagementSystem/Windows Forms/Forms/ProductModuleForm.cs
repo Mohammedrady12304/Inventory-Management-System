@@ -29,17 +29,17 @@ namespace Windows_Forms.Forms
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtPName.Text))
+                if (!ValidateInputs())
                 {
-                    MessageBox.Show("Please enter product name.", "Validation",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
+
                 }
 
                 if (MessageBox.Show("Are you sure you want to save this product?",
                     "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     var selectedCat = comboCat.SelectedItem as Category;
+
                     var newProduct = new Product
                     {
                         pname = txtPName.Text,
@@ -48,13 +48,18 @@ namespace Windows_Forms.Forms
                         pdescription = txtPDes.Text,
                         catid = selectedCat?.catid
                     };
+
                     _productRepo.Add(newProduct);
                     _productRepo.Save();
+
                     MessageBox.Show("Product has been successfully saved.");
                     Clear();
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void Clear()
@@ -74,6 +79,12 @@ namespace Windows_Forms.Forms
         {
             try
             {
+                if (!ValidateInputs())
+                {
+                    return;
+                }
+                    
+
                 if (MessageBox.Show("Are you sure you want to update this product?",
                     "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -98,5 +109,43 @@ namespace Windows_Forms.Forms
         }
 
         private void comboCat_SelectedIndexChanged(object sender, EventArgs e) { }
+
+
+
+        private bool ValidateInputs()
+        {
+           
+            if (string.IsNullOrWhiteSpace(txtPName.Text))
+            {
+                MessageBox.Show("Product name is required.");
+                return false;
+            }
+
+           
+
+            if (txtPName.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Product name cannot contain numbers.");
+                return false;
+            }
+
+          
+            if (!int.TryParse(txtPPrice.Text, out int price))
+            {
+                MessageBox.Show("Price must be a valid number.");
+                return false;
+            }
+
+            if (price < 0)
+            {
+                MessageBox.Show("Price cannot be negative.");
+                return false;
+            }
+
+           
+            txtPPrice.Text = price.ToString();
+
+            return true;
+        }
     }
 }
