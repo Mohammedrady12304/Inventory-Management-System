@@ -92,11 +92,6 @@ namespace Windows_Forms.Forms
             openChildForm(new CustomerForm());
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnLogout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to logout?", "Logout",
@@ -109,6 +104,11 @@ namespace Windows_Forms.Forms
 
                 this.Close();
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
