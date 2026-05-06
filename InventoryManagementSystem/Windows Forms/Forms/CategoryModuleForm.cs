@@ -24,6 +24,11 @@ namespace Windows_Forms.Forms
                     MessageBox.Show("Please enter a category name.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                if (!txtCatName.Text.All(char.IsLetter))
+                {
+                    MessageBox.Show("Category Name must contain letters only!");
+                    return;
+                }
                 if (MessageBox.Show("Save this category?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     _categoryRepo.Add(new Category { catname = txtCatName.Text.Trim() });
@@ -49,6 +54,11 @@ namespace Windows_Forms.Forms
                 if (string.IsNullOrWhiteSpace(txtCatName.Text))
                 {
                     MessageBox.Show("Please enter a category name.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (!txtCatName.Text.All(char.IsLetter))
+                {
+                    MessageBox.Show("Category Name must contain letters only!");
                     return;
                 }
                 if (MessageBox.Show("Update this category?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
